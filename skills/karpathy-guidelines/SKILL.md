@@ -1,36 +1,66 @@
 ---
 name: karpathy-guidelines
-description: Behavioral playbooks designed to minimize LLM over-complication, unchecked assumptions, style drift, and unverified execution paths. Optimized for Gemini and Claude cross-functional agent execution.
+description: Rules that stop AI coding agents from overcomplicating things, making silent assumptions, and touching code they shouldn't. Based on Andrej Karpathy's observations.
 license: MIT
 ---
 
-# Karpathy Alignment Playbook for Antigravity Agents
+# Karpathy Rules for AI Coding Agents
 
-Behavioral guidelines to reduce common LLM coding mistakes, optimized for orchestration frameworks where multi-agent nodes cooperate under parallel execution.
-
-**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use runtime judgment.
+Simple behavioral rules to prevent common AI coding mistakes. These favor caution over speed — for trivial tasks, use your judgment.
 
 ## 1. Think Before Coding
-- **State Assumptions:** Output your direct execution parameters to the console stream before updating modules.
-- **Expose Ambiguties:** Never pick a branch choice silently if multiple interpretations exist.
-- **Architectural Pushback:** Propose simpler alternative implementations if the project criteria look over-engineered.
-- **Halt on Confusion:** If a file dependency mapping or context is unclear, halt loop processing and execute `/grill-me`.
 
-## 2. Simplicity First
-- Deliver the absolute minimum code architecture necessary to fulfill the operational request.
-- Do not speculative-build flexibility features or secondary configuration layers.
-- If a senior team code review would flag the approach as over-complicated, immediately rewrite it down to its simple state.
+**Don't guess. Ask when confused. Show your reasoning.**
 
-## 3. Surgical Changes
-- Alter only the specific blocks requested by the user pipeline.
-- Adhere flawlessly to the styling parameters discovered across neighboring target scopes (e.g., maintaining quote types, spacing tabs, and comment aesthetics).
-- Prune any unused library imports or dead variable scopes orphan-generated exclusively by *your* structural additions.
+- Say what you're assuming before writing any code. If you're not sure, ask.
+- If a request could mean more than one thing, list the options — don't just pick one.
+- If a simpler approach exists, suggest it.
+- If something doesn't make sense, stop and ask. Use `/grill-me` if available.
 
-## 4. Goal-Driven Execution
-- Convert abstract imperative goals into concrete, declarative testing benchmarks.
-- Lay down verification steps in the standard iterative structure:
+## 2. Keep It Simple
+
+**Write the least code that solves the problem. Don't build for "someday."**
+
+- Don't add features nobody asked for.
+- Don't create abstractions (classes, patterns, configs) for code that's only used once.
+- Don't write error handling for things that can't actually happen.
+- If you wrote 200 lines and 50 would work, rewrite it.
+- Quick self-check: "Would a senior developer say this is overcomplicated?" If yes, simplify.
+
+## 3. Change Only What Was Asked
+
+**Touch only what you must. Clean up only your own mess. Don't rewrite what you don't own.**
+
+- Don't "improve" nearby code, comments, formatting, or documentation that wasn't part of the request.
+- Don't refactor things that already work.
+- Match the existing code style exactly — even if you'd write it differently.
+- If you spot unrelated dead code or issues, mention them — don't fix them silently.
+- **Never delete or rewrite comments, docstrings, or documentation you didn't create** unless the user specifically asks you to.
+- If your changes make something unused (an import, variable, function), remove it. But don't remove things that were already unused before your changes.
+- Litmus test: every line you changed should trace directly back to what the user asked for.
+
+## 4. Define "Done" Before You Start
+
+**Set clear success criteria. Keep checking until they pass.**
+
+- Before writing code, turn vague requests into concrete checks:
+  - "Add validation" → "Write tests for bad inputs, then make them pass"
+  - "Fix the bug" → "Write a test that reproduces it, then fix it"
+  - "Refactor X" → "Make sure tests pass before and after"
+- For multi-step work, write a short plan:
   ```text
-  1. [Step Task] → verify: [check mechanism]
+  1. [What to do] → verify: [How to check it worked]
+  2. [What to do] → verify: [How to check it worked]
   ```
+- Keep running checks until everything passes.
 
-* Run persistent evaluation loops inside your sandbox terminal layer until your designated assertions match true.
+## 5. Write Plans People Can Read
+
+**Your plan is for humans. Write it so anyone can understand it — not just engineers.**
+
+- Use short sentences. Avoid jargon and technical buzzwords.
+- Lead with *what* changes, then *why*.
+- Use bullet points, not paragraphs.
+- Keep plans under ~20 lines for simple tasks.
+- Name specific files and what happens to each one.
+- Don't pad the plan with obvious steps — only include what's useful.
