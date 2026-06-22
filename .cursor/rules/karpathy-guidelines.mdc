@@ -88,6 +88,16 @@ Work top-down through this list. The moment a rung covers the need, stop there.
 - In those lines: highlight what was deliberately *skipped* and any edge condition that would require an upgrade path.
 - Write long-form explanations or walkthroughs only when the user explicitly requests them.
 
+## 8. Safety Valves & Scaling (Caveman Protocol)
+
+**Enforce explicit safety overrides and respect requested intensity levels.**
+
+- **Auto-Clarity Filter:** If a task involves a high-risk trust boundary, data loss risk, core security vulnerabilities, or destructive database migrations, immediately suspend the 3-line prose ceiling. Use explicit, verbose engineering prose until the boundary is safe or direct confusion is resolved, then resume minimalism.
+- **Dynamic Intensity:** Tailor the execution footprint based on the user's explicit prompts:
+  - **Lite Mode:** Follow the planning rules fully. Keep explanations short but conversational.
+  - **Full Mode (Default):** Enforce the strict 3-line prose ceiling and strictly apply the YAGNI ladder.
+  - **Ultra Mode:** Zero trailing prose or code commentary whatsoever. Output only the pure raw code block diff instantly.
+
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
