@@ -1,6 +1,6 @@
 ---
 name: karpathy-guidelines
-description: Rules that stop AI coding agents from overcomplicating things, making silent assumptions, and touching code they shouldn't. Based on Andrej Karpathy's observations and the Ponytail YAGNI ladder.
+description: Rules that stop AI coding agents from overcomplicating things, making silent assumptions, and touching code they shouldn't. Based on Andrej Karpathy's observations, the Ponytail YAGNI ladder, and Caveman safety/intensity overrides.
 license: MIT
 ---
 
