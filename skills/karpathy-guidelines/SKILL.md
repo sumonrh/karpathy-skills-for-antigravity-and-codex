@@ -1,6 +1,6 @@
 ---
 name: karpathy-guidelines
-description: Rules that stop AI coding agents from overcomplicating things, making silent assumptions, and touching code they shouldn't. Based on Andrej Karpathy's observations.
+description: Rules that stop AI coding agents from overcomplicating things, making silent assumptions, and touching code they shouldn't. Based on Andrej Karpathy's observations and the Ponytail YAGNI ladder.
 license: MIT
 ---
 
@@ -64,3 +64,27 @@ Simple behavioral rules to prevent common AI coding mistakes. These favor cautio
 - Keep plans under ~20 lines for simple tasks.
 - Name specific files and what happens to each one.
 - Don't pad the plan with obvious steps — only include what's useful.
+
+## 6. Apply the YAGNI Ladder
+
+**Before writing any new code, stop at the first rung that holds.**
+
+Work top-down through this list. The moment a rung covers the need, stop there.
+
+1. **Does it need to exist?** If not — skip it entirely (YAGNI).
+2. **Does the standard library handle it?** Use it. Don't write a utility function.
+3. **Does a native platform or browser feature cover it?** Use it (e.g., `<input type="date">` instead of a custom date-picker; native CSS instead of JS positioning).
+4. **Is a dependency already installed in the project?** Use it before adding a new one.
+5. **Can it be one line?** Write one line.
+6. **Only then:** write the minimum that works.
+
+> **Lazy, not negligent.** Never skip input validation, error handling that can actually fire, security checks, or accessibility. The ladder only cuts accidental complexity.
+
+## 7. Output Discipline
+
+**Code first. Prose ceiling: 3 short lines max.**
+
+- Output code blocks immediately after the brief plan.
+- After the code, limit any trailing explanation to a maximum of 3 short lines.
+- In those lines: highlight what was deliberately *skipped* and any edge condition that would require an upgrade path.
+- Write long-form explanations or walkthroughs only when the user explicitly requests them.
