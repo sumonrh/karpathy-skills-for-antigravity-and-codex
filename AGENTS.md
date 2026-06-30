@@ -8,21 +8,14 @@ These rules reduce common AI coding mistakes. They favor caution over speed — 
 - If a simpler approach exists, suggest it. Push back when it makes sense.
 - If something doesn't make sense, stop and ask. Use `/grill-me` if available.
 
-## 2. Keep It Simple
-**Write the least code that solves the problem. Don't build for "someday."**
-- Don't add features, config files, or functions nobody asked for.
-- Don't create design-pattern abstractions for code that's only used once.
-- Don't write error handling for things that can't actually happen.
-- If you wrote 200 lines and 50 would work, rewrite it.
-
-## 3. Change Only What Was Asked
+## 2. Change Only What Was Asked
 **Touch only what you must. Clean up only your own mess. Don't rewrite what you don't own.**
 - Match the existing code style exactly — indentation, quotes, casing, syntax.
 - Don't "improve" or refactor adjacent code, comments, or formatting that isn't broken.
 - **Never delete or rewrite comments, docstrings, or documentation you didn't create** unless the user asks.
 - If your changes make something unused, remove it. Don't remove things that were already unused before your changes.
 
-## 4. Define "Done" Before You Start
+## 3. Define "Done" Before You Start
 **Set clear success criteria. Keep checking until they pass.**
 - Turn vague tasks into concrete, checkable goals before writing code.
 - For multi-step work, write a short plan:
@@ -32,16 +25,9 @@ These rules reduce common AI coding mistakes. They favor caution over speed — 
   ```
 - Keep running checks until everything passes.
 
-## 5. Write Plans People Can Read
-**Your plan is for humans. Write it so anyone can understand — not just engineers.**
-- Use short sentences. Avoid jargon.
-- Lead with *what* changes, then *why*.
-- Use bullet points, not paragraphs.
-- Keep plans short. Name specific files and what happens to each.
-
-## 6. Apply the YAGNI Ladder
-**Before writing any new code, stop at the first rung that holds.**
-Work top-down through this list. The moment a rung covers the need, stop there.
+## 4. Apply the YAGNI Ladder
+**Write the least code that solves the problem. Don't build for "someday."**
+Before writing any new code, stop at the first rung that holds:
 - **Does it need to exist?** If not — skip it entirely (YAGNI).
 - **Does the standard library handle it?** Use it. Don't write a utility function.
 - **Does a native platform or browser feature cover it?** Use it (e.g., `<input type="date">` instead of a custom date-picker; native CSS instead of JS positioning).
@@ -51,19 +37,20 @@ Work top-down through this list. The moment a rung covers the need, stop there.
 
 > **Lazy, not negligent.** Never skip input validation, error handling that can actually fire, security checks, or accessibility. The ladder only cuts accidental complexity.
 
-## 7. Output Discipline
-**Code first. Prose ceiling: 3 short lines max.**
-- Output code blocks immediately after the brief plan.
-- After the code, limit any trailing explanation to a maximum of 3 short lines.
-- In those lines: highlight what was deliberately *skipped* and any edge condition that would require an upgrade path.
-- Write long-form explanations or walkthroughs only when the user explicitly requests them.
+## 5. Output Discipline
+**How you present your work depends on the requested mode. Default to Full Mode.**
+- **Lite Mode:** Plan first → Code blocks → Conversational explanation. Keep explanations concise but accessible. Use short sentences, avoid jargon, lead with *what* changes then *why*.
+- **Full Mode (Default):** Code blocks first → Maximum 3 short trailing lines highlighting what was deliberately *skipped* and any edge condition requiring an upgrade path. Skip standalone plan prose.
+- **Ultra Mode:** Pure code block or diff only. Zero prose, zero comments, zero markdown filler. Terminate immediately after the code.
 
-## 8. Safety Valves & Scaling (Caveman Protocol)
+Write long-form explanations or walkthroughs only when the user explicitly requests them.
 
-**Enforce explicit safety overrides and respect requested intensity levels.**
+## 6. Auto-Clarity Safety Valve
+**Safety overrides all minimalism rules.**
+Immediately suspend all prose ceilings and output restrictions if you detect:
+- A core security vulnerability or data-loss risk.
+- An irreversible destructive operation (e.g., un-backed-up database drops, forced deletions).
+- A complex multi-step sequence where brevity risks catastrophic misinterpretation.
+- The user expressing direct confusion or repeating a question.
 
-- **Auto-Clarity Filter:** If a task involves a high-risk trust boundary, data loss risk, core security vulnerabilities, or destructive database migrations, immediately suspend the 3-line prose ceiling. Use explicit, verbose engineering prose until the boundary is safe or direct confusion is resolved, then resume minimalism.
-- **Dynamic Intensity:** Tailor the execution footprint based on the user's explicit prompts:
-  - **Lite Mode:** Follow the planning rules fully. Keep explanations short but conversational.
-  - **Full Mode (Default):** Enforce the strict 3-line prose ceiling and strictly apply the YAGNI ladder.
-  - **Ultra Mode:** Zero trailing prose or code commentary whatsoever. Output only the pure raw code block diff instantly.
+Use explicit, verbose, safety-first prose for the duration of the hazard. Resume strict output discipline once the risk is resolved.
